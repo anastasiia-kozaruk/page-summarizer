@@ -1,0 +1,25 @@
+{
+    "$schema": "https://apify.com/schemas/v1/input.ide.json",
+    "title": "Page Summarizer",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "url": {
+            "title": "Page URL",
+            "type": "string",
+            "description": "The web page you want summarized.",
+            "editor": "textfield",
+            "prefill": "https://apify.com/about"
+        },
+        "model": {
+            "title": "Claude model",
+            "type": "string",
+            "description": "Haiku is fast and cheap; Sonnet writes better summaries.",
+            "editor": "select",
+            "enum": ["claude-haiku-4-5-20251001", "claude-sonnet-5"],
+            "enumTitles": ["Claude Haiku 4.5", "Claude Sonnet 5"],
+            "default": "claude-haiku-4-5-20251001"
+        }
+    },
+    "required": ["url"]
+}
