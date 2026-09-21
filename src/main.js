@@ -7,13 +7,15 @@ const MAX_PAGE_CHARS = 50_000;
 
 await Actor.init();
 
-const { url, model = 'claude-haiku-4-5-20251001' } = (await Actor.getInput()) ?? {};
+const { url, model = 'claude-haiku-4-5-20251001', anthropicApiKey } = (await Actor.getInput()) ?? {};
+// The key comes from the secret input field; the ANTHROPIC_API_KEY env variable is a fallback for local runs.
+const apiKey = anthropicApiKey || process.env.ANTHROPIC_API_KEY;
 
 if (!url || !/^https?:\/\//.test(url)) {
     throw new Error('Input "url" must be a full http(s) URL, e.g. https://apify.com');
 }
-if (!process.env.ANTHROPIC_API_KEY) {
-    throw new Error('Please configure the ANTHROPIC_API_KEY environment variable.');
+if (!apiKey) {
+    throw new Error('Please enter your Anthropic API key in the "Anthropic API key" input field.');
 }
 
 // 1. Download the page and keep only its readable text.
@@ -33,7 +35,7 @@ if (!pageText) {
 
 // 2. Ask Claude to summarize it.
 log.info(`Summarizing ${pageText.length} characters with ${model}`);
-const anthropic = new Anthropic();
+const anthropic = new Anthropic({ apiKey });
 const message = await anthropic.messages.create({
     model,
     max_tokens: 1024,

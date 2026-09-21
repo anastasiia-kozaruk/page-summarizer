@@ -19,6 +19,13 @@
             "enum": ["claude-haiku-4-5-20251001", "claude-sonnet-5"],
             "enumTitles": ["Claude Haiku 4.5", "Claude Sonnet 5"],
             "default": "claude-haiku-4-5-20251001"
+        },
+        "anthropicApiKey": {
+            "title": "Anthropic API key",
+            "type": "string",
+            "description": "Your own Claude API key from https://console.anthropic.com/settings/keys. Required unless the Actor owner set ANTHROPIC_API_KEY as an environment variable.",
+            "editor": "textfield",
+            "isSecret": true
         }
     },
     "required": ["url"]

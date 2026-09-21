@@ -12,8 +12,9 @@
 
 1. Open the **Input** tab.
 2. Paste the page address into **Page URL**.
-3. Optionally pick a **Claude model**.
-4. Click **Start** and open the **Output** tab when the run finishes (usually under 30 seconds).
+3. Paste your **Anthropic API key** (get one at https://console.anthropic.com/settings/keys).
+4. Optionally pick a **Claude model**.
+5. Click **Start** and open the **Output** tab when the run finishes (usually under 30 seconds).
 
 ## Input
 
@@ -48,7 +49,7 @@ Each run saves one item to the dataset. You can download the dataset in various 
 
 ## How much does it cost?
 
-Each run uses a small amount of Apify compute (a few seconds) plus one Claude API call, billed to the Anthropic key set on the Actor. Haiku 4.5 is the cheapest option.
+Each run uses a small amount of Apify compute (a few seconds) plus one Claude API call, billed to your own Anthropic API key. Haiku 4.5 is the cheapest option.
 
 ## Tips and limitations
 
@@ -57,7 +58,7 @@ Each run uses a small amount of Apify compute (a few seconds) plus one Claude AP
 
 ## Setup (for developers)
 
-The Actor reads the Claude API key from `ANTHROPIC_API_KEY`, mapped in `.actor/actor.json` to the Apify secret `anthropicApiKey`. When building from Git, set `ANTHROPIC_API_KEY` as a secret environment variable in the Actor's **Source** tab in Apify Console.
+Each user enters their own Claude API key in the **Anthropic API key** input field. The field is marked `isSecret`, so Apify stores it encrypted and never shows it in logs. For local runs, the Actor falls back to the `ANTHROPIC_API_KEY` environment variable, which `.actor/actor.json` maps to the Apify secret `anthropicApiKey`.
 
 ## FAQ
 
